@@ -1,7 +1,20 @@
 services:
+  client:
+    image: my-client
+    build: ./client
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./client:/app
+    depends_on:
+      - server
+    stdin_open: true
+    tty: true
+
   server:
-    build: .
+    image: my-server
+    build: ./server
     ports:
       - "6969:6969"
     volumes:
-      - .:/app
+      - ./server:/app
